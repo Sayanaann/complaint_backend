@@ -4,13 +4,11 @@ import com.example.complaintreportapp_backend.dao.complaintdao;
 import com.example.complaintreportapp_backend.model.Complaints;
 import com.example.complaintreportapp_backend.model.Userreg;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class complaintcontroller {
@@ -25,4 +23,15 @@ public class complaintcontroller {
         dao.save(c);
          map.put("status","success");
         return  map;
+}
+    @CrossOrigin(origins = "*")
+    @GetMapping (path = "/viewallcomplaints")
+    public List<Map<String,String>> viewall() {
+        return  (List<Map<String, String>>) dao.complaints();
+
+}
+    @CrossOrigin(origins = "*")
+    @PostMapping (path = "/mycomplaints", consumes = "application/json", produces = "application/json")
+    public List<Complaints> viewmycomplaints(@RequestBody Complaints c) {
+        return  (List<Complaints>) dao.viewmycomplaints(c.getUserid());
 }}
