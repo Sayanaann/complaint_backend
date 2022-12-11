@@ -53,7 +53,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/getuser", consumes = "application/json", produces = "application/json")
     public  List<Userreg> getuser(@RequestBody Userreg u) {
-        return (List<Userreg>) dao.finduser(u.getUsername());
+        return (List<Userreg>) dao.finduser(u.getId());
     }
 
 }
